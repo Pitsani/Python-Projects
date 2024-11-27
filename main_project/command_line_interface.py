@@ -1,4 +1,4 @@
-import second
+import functions
 import time
 
 now = time.strftime("%b %d, %Y  %H:%M:%S")
@@ -11,27 +11,27 @@ while True:
     if user_input.startswith('add'):
         todo = user_input[4:]
 
-        todos = second.readFile()
+        todos = functions.readFile()
 
         todos.append(todo+"\n")
 
-        second.openFile(todos)
+        functions.openFile(todos)
 
     elif user_input.startswith('show'):
-        todos = second.readFile()
+        todos = functions.readFile()
         new_todos = [item.strip('\n') for item in todos]
         for index, i in enumerate(new_todos):
             print(f"{index+1}-{i}")
 
     elif user_input.startswith('edit'):
         try:
-            todos = second.readFile()
+            todos = functions.readFile()
             number = int(user_input[5:])
             number=number-1
             new_todo = input("Enter a new to do: ")
             todos[number] = new_todo + '\n'
 
-            second.openFile(todos)
+            functions.openFile(todos)
         except ValueError:
             print("Your command is invalid!\n")
             continue
@@ -39,11 +39,11 @@ while True:
     elif user_input.startswith('complete'):
         try:
             number = int(user_input[9:])
-            todos = second.readFile()
+            todos = functions.readFile()
             index = number-1
             todo_to_remove = todos[index].strip("\n")
             todos.pop(index)
-            second.openFile(todos)
+            functions.openFile(todos)
 
             message = f"Todo '{todo_to_remove}' was removed."
             print(message)
